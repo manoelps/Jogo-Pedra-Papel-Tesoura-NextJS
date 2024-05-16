@@ -19,3 +19,11 @@ bun dev
 Abra [http://localhost:3000](http://localhost:3000) com seu navegador para ver o resultado.
 
 ##
+
+![alt text](image-1.png)
+
+![alt text](image-2.png)
+
+![alt text](image-3.png)
+
+![alt text](image.png)
