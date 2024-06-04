@@ -9,11 +9,13 @@ const useGame = () => {
   const [move, setMove] = useState<MoveProps>({
     player1: {
       id: 0,
-      hand: ''
+      hand: '',
+      choice: ''
     },
     player2: {
       id: 0,
-      hand: ''
+      hand: '',
+      choice: ''
     }
   });
   const [scoreboard, setScoreboard] = useState<PlacarProps>({
@@ -28,11 +30,13 @@ const useGame = () => {
       setMove({
         player1: {
           id: play.id,
-          hand: play.hand
+          hand: play.hand,
+          choice: play.choice
         },
         player2: {
           id: 1,
-          hand: ''
+          hand: '',
+          choice: ''
         }
       });
       setWinner('');
@@ -41,7 +45,8 @@ const useGame = () => {
         ...prevMove,
         player2: {
           id: play.id,
-          hand: play.hand
+          hand: play.hand,
+          choice: play.choice
         }
       }));
     }
@@ -52,32 +57,24 @@ const useGame = () => {
       setTimeout(() => {
         const positionHand = getRadomNumber(3);
         handlePlay(hands[positionHand]);
-        checkWinner(positionHand);
+        checkWinner(move.player1.choice, hands[positionHand].choice);
       }, 700);
     }
   };
 
-  const checkWinner = (positionHand: number) => {
-    if (
-      move.player1.id !== hands[positionHand].id &&
-      move.player1.id !== 0 &&
-      hands[positionHand].id !== 0
-    ) {
-      if (hands[positionHand].id === 1 && move.player1.id === 3) {
-        updateScore('player2');
-      } else if (hands[positionHand].id === 3 && move.player1.id === 2) {
-        updateScore('player2');
-      } else if (hands[positionHand].id === 2 && move.player1.id === 1) {
-        updateScore('player2');
-      } else if (move.player1.id === 1 && hands[positionHand].id === 3) {
-        updateScore('player1');
-      } else if (move.player1.id === 3 && hands[positionHand].id === 2) {
-        updateScore('player1');
-      } else if (move.player1.id === 2 && hands[positionHand].id === 1) {
-        updateScore('player1');
-      }
-    } else {
+  const checkWinner = (playerChoice: string, computerChoice: string) => {
+    if (playerChoice === computerChoice) {
       setWinner('');
+    } else {
+      if (
+        (playerChoice === 'pedra' && computerChoice === 'tesoura') ||
+        (playerChoice === 'papel' && computerChoice === 'pedra') ||
+        (playerChoice === 'tesoura' && computerChoice === 'papel')
+      ) {
+        updateScore('player1');
+      } else {
+        updateScore('player2');
+      }
     }
   };
 
@@ -94,11 +91,13 @@ const useGame = () => {
     setMove({
       player1: {
         id: 0,
-        hand: ''
+        hand: '',
+        choice: ''
       },
       player2: {
         id: 0,
-        hand: ''
+        hand: '',
+        choice: ''
       }
     });
     setScoreboard({
@@ -110,7 +109,6 @@ const useGame = () => {
 
   useEffect(() => {
     iaPlayer();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [player]);
 
   return {

@@ -1,17 +1,12 @@
 export type HandProps = {
   id: number;
   hand: string;
+  choice: string;
 };
 
 export type MoveProps = {
-  player1: {
-    id: number;
-    hand: string;
-  };
-  player2: {
-    id: number;
-    hand: string;
-  };
+  player1: HandProps;
+  player2: HandProps;
 };
 
 export type PlacarProps = {

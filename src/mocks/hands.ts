@@ -1,14 +1,17 @@
 export const hands = [
   {
     id: 1,
-    hand: '✊'
+    hand: '✊',
+    choice: 'pedra'
   },
   {
     id: 2,
-    hand: '🖐️'
+    hand: '🖐️',
+    choice: 'papel'
   },
   {
     id: 3,
-    hand: '✌'
+    hand: '✌',
+    choice: 'tesoura'
   }
 ];
